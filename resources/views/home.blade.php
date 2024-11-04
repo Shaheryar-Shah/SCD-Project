@@ -152,7 +152,7 @@
               </div>
               <h2 class="text-xl font-medium title-font text-white mt-5">Encrypted files</h2>
               <p class="text-base leading-relaxed mt-2">Go all out and have your files encrypted, backed up, and always within reach in a secure cloud. Share securely, sync effortlessly, and rest easy.</p>
-              <a class="text-blue-600 inline-flex items-center mt-3">Learn More
+              <a class="text-red-600 inline-flex items-center mt-3">Learn More
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                   <path d="M5 12h14M12 5l7 7-7 7"></path>
                 </svg>
