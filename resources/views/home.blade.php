@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-web-layout>
 
     <section class="text-gray-400 bg-gray-900 body-font">
         <div class="container px-5 py-24 mx-auto">
@@ -180,5 +180,5 @@
         </div>
       </section>
 
-</x-app-layout>
+</x-web-layout>
 

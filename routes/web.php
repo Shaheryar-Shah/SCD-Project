@@ -1,12 +1,19 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'home');
-Route::view('/welcome', 'welcome');
-Route::view('/pricing', 'pricing');
-Route::view('/feedback', 'feedback');
+// Route::view('/', 'home');
+// Route::view('/welcome', 'welcome');
+// Route::view('/pricing', 'pricing');
+// Route::view('/feedback', 'feedback');
+
+Route::get('/', [WebController::class, 'home'])->name('home');
+Route::get('/welcome', [WebController::class, 'welcome'])->name('welcome');
+Route::get('/pricing', [WebController::class, 'pricing'])->name('pricing');
+Route::get('/feedback', [WebController::class, 'feedback'])->name('feedback');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

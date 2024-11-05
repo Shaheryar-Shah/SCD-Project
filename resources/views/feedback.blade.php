@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-web-layout>
 
     <section class="text-gray-400 bg-gray-900 body-font relative">
         <div class="container px-5 py-24 mx-auto flex sm:flex-nowrap flex-wrap">
@@ -38,4 +38,4 @@
         </div>
       </section>
 
-</x-app-layout>
+</x-web-layout>
