@@ -165,7 +165,7 @@
 
       <section class="text-gray-400 bg-gray-900 body-font">
         <div class="container px-5 py-24 mx-auto flex flex-wrap">
-          <h2 class="sm:text-3xl text-2xl text-white font-medium title-font mb-2 md:w-2/5">Why NordVPN? Protect yourself online.</h2>
+          <h2 class="sm:text-3xl text-2xl text-white font-medium title-font mb-2 md:w-2/5">Why Rook VPN? Protect yourself online.</h2>
           <div class="md:w-3/5 md:pl-6">
             <p class="leading-relaxed text-base">Thanks to all kinds of nifty, cutting-edge technology, NordVPN keeps your devices malware free and your online activities safe from strangers’ eyes. How safe? It would take the world’s most powerful computer billions of years to unencrypt your data — that safe.</p>
             <div class="flex md:mt-4 mt-6">
