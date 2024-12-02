@@ -21,6 +21,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        SubscriptionPlan::where('name', 'PRO')->update(['is_popular' => true]);
+        // SubscriptionPlan::where('name', 'PRO')->update(['is_popular' => true]);
+
+        // Call the CustomerSeeder
+        $this->call(CustomerSeeder::class);
     }
+
+
 }

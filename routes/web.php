@@ -5,6 +5,8 @@ use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SubscriptionPlanController;
 use App\Models\SubscriptionPlan;
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\Admin\CustomerController;
 
 
 Route::get('/', [WebController::class, 'home'])->name('home');
@@ -21,10 +23,10 @@ Route::get('/feedback', [WebController::class, 'feedback'])->name('feedback');
 
 // -------------------------------------------------------------------------------------------------------------------------------------
 
-Route::get('/subscription', function () {
-    $plans = SubscriptionPlan::all();
-    return view('subscription-plans', compact('plans'));
-})->name('subscription-plans');
+// Route::get('/subscription', function () {
+//     $plans = SubscriptionPlan::all();
+//     return view('subscription-plans', compact('plans'));
+// })->name('subscription-plans');
 
 
 Route::get('/subscribe/{id}', function ($id) {
@@ -35,6 +37,22 @@ Route::get('/subscribe/{id}', function ($id) {
 // -------------------------------------------------------------------------------------------------------------------------------
 
 Route::resource('subscription-plans', SubscriptionPlanController::class);
+Route::resource('subscriptions', SubscriptionController::class);
+
+// -----------------------------------------------------------------------------------------------------------------------------------
+
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('customers/create', [CustomerController::class, 'create'])->name('admin.customers.create');
+    Route::post('customers', [CustomerController::class, 'store'])->name('admin.customers.store');
+});
+
+Route::prefix('admin')->middleware('auth')->group(function () {
+    // Route for displaying the customer list
+    Route::get('customers', [CustomerController::class, 'index'])->name('admin.customers.index');
+
+    // Route for deleting a customer
+    Route::delete('customers/{id}', [CustomerController::class, 'destroy'])->name('admin.customers.destroy');
+});
 
 // -----------------------------------------------------------------------------------------------------------------------------------
 
