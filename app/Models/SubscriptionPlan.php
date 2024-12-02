@@ -13,5 +13,6 @@ class SubscriptionPlan extends Model
         'name',
         'price',
         'features',
+        'is_popular',
     ];
 }

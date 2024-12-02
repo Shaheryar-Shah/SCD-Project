@@ -1,5 +1,4 @@
 <x-web-layout>
-
     <section class="text-gray-400 bg-gray-900 body-font overflow-hidden">
         <div class="container mx-auto p-6">
             <h1 class="text-3xl font-bold mb-4 text-center">Subscription Plans</h1>
@@ -21,6 +20,7 @@
                             <th class="py-2 px-4 border-b text-left text-gray-100">Name</th>
                             <th class="py-2 px-4 border-b text-left text-gray-100">Price</th>
                             <th class="py-2 px-4 border-b text-left text-gray-100">Features</th>
+                            <th class="py-2 px-4 border-b text-left text-gray-100">Is Popular</th>
                             <th class="py-2 px-4 border-b text-left text-gray-100">Actions</th>
                         </tr>
                     </thead>
@@ -31,6 +31,9 @@
                                 <td class="py-2 px-4 border-b text-gray-100">{{ $plan->name }}</td>
                                 <td class="py-2 px-4 border-b text-gray-100">${{ number_format($plan->price, 2) }}</td>
                                 <td class="py-2 px-4 border-b text-gray-100">{{ $plan->features }}</td>
+                                <td class="py-2 px-4 border-b text-gray-100">
+                                    {{ $plan->is_popular ? 'Yes' : 'No' }}
+                                </td>
                                 <td class="py-2 px-4 border-b">
                                     <div class="flex space-x-2">
                                         <a href="{{ route('subscription-plans.edit', $plan->id) }}" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded hover:bg-yellow-500 transition duration-200">Edit</a>
@@ -48,5 +51,4 @@
             </div>
         </div>
     </section>
-
 </x-web-layout>

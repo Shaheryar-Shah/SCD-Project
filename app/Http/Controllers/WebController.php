@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\SubscriptionPlan;
 
 class WebController extends Controller
 {
     public function home(){
-        return view('home');
+        $plans = SubscriptionPlan::all();
+
+        return view('subscription-pricing', compact('plans'));
     }
 
     public function welcome(){

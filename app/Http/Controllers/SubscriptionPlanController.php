@@ -70,6 +70,7 @@ class SubscriptionPlanController extends Controller
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'features' => 'required|string',
+            'is_popular' => 'boolean', // Validate as a boolean field
         ]);
 
         $plan = SubscriptionPlan::findOrFail($id);

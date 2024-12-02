@@ -7,20 +7,26 @@ use App\Http\Controllers\SubscriptionPlanController;
 use App\Models\SubscriptionPlan;
 
 
-// Route::view('/', 'home');
-// Route::view('/welcome', 'welcome');
-// Route::view('/pricing', 'pricing');
-// Route::view('/feedback', 'feedback');
-
 Route::get('/', [WebController::class, 'home'])->name('home');
 Route::get('/welcome', [WebController::class, 'welcome'])->name('welcome');
-Route::get('/pricing', [WebController::class, 'pricing'], )->name('pricing');
+
+// Route::get('/pricing', [WebController::class, 'pricing'], )->name('pricing');
+
+Route::get('/pricing', function () {
+    $plans = SubscriptionPlan::all();
+    return view('pricing', compact('plans'));
+})->name('pricing');
+
 Route::get('/feedback', [WebController::class, 'feedback'])->name('feedback');
+
+// -------------------------------------------------------------------------------------------------------------------------------------
 
 Route::get('/subscription', function () {
     $plans = SubscriptionPlan::all();
     return view('subscription-plans', compact('plans'));
 })->name('subscription-plans');
+
+
 
 Route::get('/subscribe/{id}', function ($id) {
     // Handle subscription logic here
