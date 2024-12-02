@@ -9,9 +9,7 @@ use App\Models\SubscriptionPlan;
 class WebController extends Controller
 {
     public function home(){
-        $plans = SubscriptionPlan::all();
-
-        return view('subscription-pricing', compact('plans'));
+        return view('home');
     }
 
     public function welcome(){
@@ -20,7 +18,9 @@ class WebController extends Controller
 
 
     public function pricing(){
-        return view("pricing");
+        $plans = SubscriptionPlan::all();
+
+        return view('pricing', compact('plans'));
     }
 
     public function feedback(){

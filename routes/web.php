@@ -27,7 +27,6 @@ Route::get('/subscription', function () {
 })->name('subscription-plans');
 
 
-
 Route::get('/subscribe/{id}', function ($id) {
     // Handle subscription logic here
     return redirect()->route('subscription-plans')->with('success', 'You have subscribed successfully!');
