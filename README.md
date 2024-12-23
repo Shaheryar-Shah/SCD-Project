@@ -176,8 +176,7 @@ This project is a Laravel-based web application designed to manage customers and
 ---
 
 ## Authors
-- Your Name
-- Collaborators (if any)
+- Syed Shaheryar Shah
 
 ## License
 This project is licensed under the MIT License.
