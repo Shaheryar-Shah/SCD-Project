@@ -1,5 +1,6 @@
 <x-web-layout>
 
+
     <section class="text-gray-400 bg-gray-900 body-font overflow-hidden">
         <div class="container mx-auto p-6">
             <h1 class="text-3xl font-bold mb-4 text-center">Subscriptions</h1>
@@ -12,6 +13,50 @@
                     {{ session('success') }}
                 </div>
             @endif
+
+            <div class="bg-gray-800 p-4 rounded mb-4">
+                <input
+                    type="text"
+                    id="search-bar"
+                    placeholder="Search by customer or subscription plan..."
+                    class="w-full p-3 rounded text-gray-300 bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                />
+                <ul
+                    id="search-results"
+                    class="bg-gray-900 text-gray-100 border border-gray-600 mt-2 rounded shadow-lg hidden"
+                >
+                    <!-- Search results will appear here dynamically -->
+                </ul>
+            </div>
+
+            <script>
+                document.getElementById('search-bar').addEventListener('keyup', function () {
+                    const query = this.value;
+
+                    if (query.length > 1) {
+                        fetch(`/search-subscriptions?q=${encodeURIComponent(query)}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                const resultsContainer = document.getElementById('search-results');
+                                resultsContainer.innerHTML = '';
+
+                                if (data.length > 0) {
+                                    resultsContainer.classList.remove('hidden');
+                                    data.forEach(result => {
+                                        const li = document.createElement('li');
+                                        li.classList.add('p-2', 'border-b', 'hover:bg-gray-800', 'cursor-pointer');
+                                        li.textContent = `${result.customer_name} (${result.plan_name})`;
+                                        resultsContainer.appendChild(li);
+                                    });
+                                } else {
+                                    resultsContainer.innerHTML = '<li class="p-2 text-gray-400">No results found</li>';
+                                }
+                            });
+                    } else {
+                        document.getElementById('search-results').classList.add('hidden');
+                    }
+                });
+            </script>
 
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-gray-700 border border-gray-500 rounded-lg shadow">

@@ -38,6 +38,7 @@ Route::get('/subscribe/{id}', function ($id) {
 
 Route::resource('subscription-plans', SubscriptionPlanController::class);
 Route::resource('subscriptions', SubscriptionController::class);
+Route::get('/search-subscriptions', [SubscriptionController::class, 'search']);
 
 // -----------------------------------------------------------------------------------------------------------------------------------
 

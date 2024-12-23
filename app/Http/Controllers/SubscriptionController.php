@@ -6,6 +6,7 @@ use App\Models\Subscription;
 use App\Models\Customer;
 use App\Models\SubscriptionPlan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SubscriptionController extends Controller
 {
@@ -68,4 +69,21 @@ class SubscriptionController extends Controller
         $subscription->delete();
         return redirect()->route('subscriptions.index')->with('success', 'Subscription deleted successfully!');
     }
+
+    public function search(Request $request)
+{
+    $query = $request->input('q');
+
+    // Fetch subscriptions matching the query
+    $results = DB::table('subscriptions')
+        ->join('customers', 'subscriptions.user_id', '=', 'customers.id')
+        ->join('subscription_plans', 'subscriptions.subscription_plan_id', '=', 'subscription_plans.id')
+        ->where('customers.name', 'like', '%' . $query . '%')
+        ->orWhere('subscription_plans.name', 'like', '%' . $query . '%')
+        ->select('customers.name as customer_name', 'subscription_plans.name as plan_name')
+        ->get();
+
+    return response()->json($results);
+}
+
 }
