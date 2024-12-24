@@ -22,29 +22,115 @@
 
         <header class="text-gray-400 bg-gray-700 body-font">
             <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-              <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-blue-900 rounded-full" viewBox="0 0 24 24">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                </svg>
-                <span class="ml-3 text-xl">Rook</span>
-              </a>
-              <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-500 flex flex-wrap items-center text-base justify-center">
-                <a class="mr-5 hover:text-white" href="/">Home</a>
-                <a class="mr-5 hover:text-white" href="/pricing">Pricing</a>
-                <a class="mr-5 hover:text-white" href="/feedback">Feedback</a>
-              </nav>
-              <!-- Search Bar -->
-              <form class="relative mr-4" action="/search" method="GET">
-                <input type="text" name="query" placeholder="Search..." class="bg-gray-600 text-gray-300 rounded-full pl-3 pr-3 py-1 focus:outline-none w-52 md:w-60">
-              </form>
-              <a class="inline-flex items-center bg-gray-700 border-0 py-1 px-3 focus:outline-none hover:bg-gray-800 rounded text-base mt-4 md:mt-0" href="/login">
-                Login/Signup
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-              </a>
+                <!-- Logo -->
+                <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-blue-900 rounded-full" viewBox="0 0 24 24">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                    </svg>
+                    <span class="ml-3 text-xl">Rook</span>
+                </a>
+
+                <!-- Navigation Links -->
+                <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-500 flex flex-wrap items-center text-base justify-center">
+                    <a class="mr-5 hover:text-white" href="/">Home</a>
+                    <a class="mr-5 hover:text-white" href="/pricing">Pricing</a>
+                    <a class="mr-5 hover:text-white" href="/feedback">Feedback</a>
+                </nav>
+
+                <!-- Search Bar and Login Button -->
+                <div class="flex items-center space-x-4">
+                    <!-- Search Form -->
+                    <form class="relative">
+                        <input
+                            type="text"
+                            id="header-search-input"
+                            name="query"
+                            placeholder="Search..."
+                            class="bg-gray-600 text-gray-300 rounded-full pl-3 pr-3 py-1 focus:outline-none w-52 md:w-60"
+                            autocomplete="off"
+                        >
+                        <ul
+                            id="header-search-results"
+                            class="absolute left-0 mt-1 w-full bg-gray-700 text-gray-300 rounded shadow-lg hidden"
+                        >
+                            <!-- Suggestions will appear here -->
+                        </ul>
+                    </form>
+
+                    <!-- Login Button -->
+                    <a
+                        class="inline-flex items-center bg-gray-700 border-0 py-1 px-3 focus:outline-none hover:bg-gray-800 rounded text-base"
+                        href="/login"
+                    >
+                        Login/Signup
+                        <svg
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            class="w-4 h-4 ml-1"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
             </div>
-          </header>
+        </header>
+
+
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const links = [
+                        { name: "Pricing", url: "/pricing" },
+                        { name: "Subscription Plans", url: "/subscription-plans" },
+                        { name: "Feedback", url: "/feedback" },
+                        { name: "Contact", url: "/contact" }
+                    ];
+
+                    const searchInput = document.getElementById('header-search-input');
+                    const searchResults = document.getElementById('header-search-results');
+                    const searchForm = document.getElementById('header-search-form');
+
+                    searchInput.addEventListener('keyup', () => {
+                        const query = searchInput.value.toLowerCase();
+                        searchResults.innerHTML = '';
+
+                        if (query.length > 0) {
+                            const matches = links.filter(link => link.name.toLowerCase().includes(query));
+
+                            if (matches.length > 0) {
+                                matches.forEach(match => {
+                                    const li = document.createElement('li');
+                                    li.className = "px-4 py-2 cursor-pointer hover:bg-gray-600";
+                                    li.textContent = match.name;
+                                    li.addEventListener('click', () => {
+                                        window.location.href = match.url;
+                                    });
+                                    searchResults.appendChild(li);
+                                });
+                                searchResults.classList.remove('hidden');
+                            } else {
+                                const li = document.createElement('li');
+                                li.className = "px-4 py-2";
+                                li.textContent = "No matches found";
+                                searchResults.appendChild(li);
+                            }
+                        } else {
+                            searchResults.classList.add('hidden');
+                        }
+                    });
+
+                    // Hide results if the user clicks outside
+                    document.addEventListener('click', (e) => {
+                        if (!searchForm.contains(e.target)) {
+                            searchResults.classList.add('hidden');
+                        }
+                    });
+                });
+            </script>
+
 
           {{-- --------------------------------------------------------------------------------------------------------------- --}}
 
